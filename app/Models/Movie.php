@@ -20,4 +20,9 @@ class Movie extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public static function topByRating()
+    {
+        return self::all()->sortByDesc('rating');
+    }
 }
