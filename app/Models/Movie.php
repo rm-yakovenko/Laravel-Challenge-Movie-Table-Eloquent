@@ -25,7 +25,7 @@ class Movie extends Model
 
     public static function topByRating()
     {
-        return self::all()->sortByDesc('rating');
+        return self::with('category')->get()->sortByDesc('rating');
     }
 
     public function updateRatingsCache()
@@ -36,7 +36,7 @@ class Movie extends Model
 
     public static function updateAllRatingsCache(DateTimeInterface $since)
     {
-        foreach(Movie::where('updated_at', '<=', $since)->cursor() as $movie) {
+        foreach(Movie::where('updated_at', '<=', $since)->lazy() as $movie) {
             $movie->updateRatingsCache();
             $movie->save();
         }
