@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 
 class MovieSeeder extends Seeder
 {
+    const MOVIES_COUNT = 20000;
+
     /**
      * Run the database seeds.
      *
@@ -14,6 +16,10 @@ class MovieSeeder extends Seeder
      */
     public function run()
     {
-        Movie::factory(1000)->create();
+        $chunkSize = 1000;
+
+        foreach (range(1, static::MOVIES_COUNT / $chunkSize) as $_) {
+            Movie::factory($chunkSize)->create();
+        }
     }
 }

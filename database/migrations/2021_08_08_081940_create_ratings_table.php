@@ -15,7 +15,8 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('movie_id');
+            $table->foreignIdFor(\App\Models\Movie::class)
+                ->constrained();
             $table->integer('rating');
             $table->timestamps();
         });

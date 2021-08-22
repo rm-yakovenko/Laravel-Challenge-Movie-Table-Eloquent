@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Rating;
+use Database\Seeders\MovieSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RatingFactory extends Factory
@@ -22,7 +23,7 @@ class RatingFactory extends Factory
     public function definition()
     {
         return [
-            'movie_id' => rand(1, 1000),
+            'movie_id' => rand(1, MovieSeeder::MOVIES_COUNT),
             'rating' => rand(1, 10)
         ];
     }
