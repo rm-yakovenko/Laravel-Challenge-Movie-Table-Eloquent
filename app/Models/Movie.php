@@ -25,7 +25,10 @@ class Movie extends Model
 
     public static function topByRating()
     {
-        return self::with('category')->get()->sortByDesc('rating');
+        return self::with('category')
+            ->orderByDesc('rating')
+            ->take(100)
+            ->get();
     }
 
     public function updateRatingsCache()
